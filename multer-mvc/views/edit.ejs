@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #e0f7fa;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            max-width: 450px;
+            margin: 0 auto;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #b0bec5;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #eceff1;
+        }
+
+        input[type="file"] {
+            padding: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #26a69a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #00796b;
+        }
+
+        .img-main{
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="/edit/<%= result._id %>" method="post" enctype="multipart/form-data">
+        <label for="user">Username:</label>
+        <input type="text" name="user" value="<%= result.user %>" placeholder="Enter Username" id="user">
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="<%= result.email %>" placeholder="Enter Email" id="email">
+
+        <label for="img">Profile Picture:</label>
+        <input type="file" name="img" id="img">
+        
+        <button type="submit">Submit</button>
+    </form>
+    <div class="img-main">
+        <img src="/<%= result.img %>" width="20%" alt="Profile Picture">
+    </div>
+</body>
+</html>
