@@ -20,7 +20,6 @@ export const add = (req, res) => {
 };
 
 export const adddata = async (req, res) => {
-    console.log(req.file);
     req.body.img = req.file.path;
     try {
         await Data.create(req.body);
