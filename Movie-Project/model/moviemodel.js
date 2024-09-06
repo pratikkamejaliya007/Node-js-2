@@ -19,6 +19,9 @@ const movieSchema= new mongoose.Schema({
     },
     poster :{
         type:String
+    },
+    video:{
+        type:String
     }
 },{timestamps:true})
 

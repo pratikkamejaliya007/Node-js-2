@@ -21,7 +21,13 @@ export const add = async(req,res)=>{
 }
 
 export const adddata = async(req,res)=>{
-    req.body.poster = req.file.path
+    
+    const poster = req.files['poster'] ? req.files['poster'][0].path : null;
+    const video = req.files['video'] ? req.files['video'][0].path : null;
+    
+    
+    req.body.poster=poster
+    req.body.video=video
     try{
         await movie.create(req.body)
         res.status(201).redirect("/")
@@ -34,8 +40,10 @@ export const deletedata = async(req,res)=>{
     try{
         const deletedata =await movie.findById(req.params.id)
         const imgpath= path.join(__dirname,"..",deletedata.poster)
+        const videopath = path.join(__dirname,"..",deletedata.video)
         if(deletedata){
             fs.unlinkSync(imgpath)
+            fs.unlinkSync(videopath)
         }
         await movie.findByIdAndDelete(req.params.id)
         res.status(200).redirect("/")
@@ -57,13 +65,22 @@ export const getedit = async(req,res)=>{
 
 export const postedit=async(req,res)=>{
     try{
+
+        
+    const poster = req.files['poster'] ? req.files['poster'][0].path : null;
+    const video = req.files['video'] ? req.files['video'][0].path : null;
+
         const editdata = await movie.findById(req.params.id)
         const imgpath = path.join(__dirname,'..',editdata.poster)
+        const videopath = path.join(__dirname,"..",editdata.video)
         if(req.file){
             fs.unlinkSync(imgpath)
-            req.body.poster = req.file.path
+            fs.unlinkSync(videopath)
+            req.body.poster = poster
+            req.body.video = video
         }else{
             req.body.poster = editdata.poster
+            req.body.video = editdata.video
         }
         
         await movie.findByIdAndUpdate(req.params.id,req.body)

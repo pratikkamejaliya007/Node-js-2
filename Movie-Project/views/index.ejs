@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Collection</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .movie-card {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .movie-card img,
+        .movie-card video {
+            display: block;
+            width: 100%;
+            height: 200px; /* Adjusted the height to leave space for other content */
+            object-fit: cover;
+            transition: opacity 0.3s ease;
+        }
+        .movie-card video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .movie-card:hover img {
+            opacity: 0;
+        }
+        .movie-card:hover video {
+            opacity: 1;
+        }
+        .movie-details {
+            padding: 10px; /* Padding to space out the content */
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4">
@@ -14,7 +45,7 @@
                 <!-- Logo -->
                 <div class="flex items-center">
                     <div class="mr-6">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCQRljVyfj3UiMHupL1q-KarIA2U3vncvyxw&s" alt="Logo" class="h-14"> <!-- Slightly larger logo -->
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCQRljVyfj3UiMHupL1q-KarIA2U3vncvyxw&s" alt="Logo" class="h-14">
                     </div>
         
                     <!-- Search Bar -->
@@ -31,7 +62,6 @@
         
                 <!-- Location, Sign-in, and Menu -->
                 <div class="flex items-center space-x-6">
-                    <!-- Location -->
                     <div class="flex items-center text-gray-700 cursor-pointer hover:text-blue-500">
                         Addanki
                         <svg class="w-4 h-4 ml-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
@@ -39,12 +69,10 @@
                         </svg>
                     </div>
         
-                    <!-- Sign-in Button -->
                     <button class="bg-red-500 text-white px-4 py-2 rounded-full shadow hover:bg-red-600 transition duration-300 ease-in-out">
                         Sign in
                     </button>
         
-                    <!-- Menu Icon -->
                     <svg class="w-8 h-8 text-gray-700 cursor-pointer hover:text-blue-500 transition duration-300 ease-in-out" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M4 5h16v2H4V5zm0 6h16v2H4v-2zm0 6h16v2H4v-2z" clip-rule="evenodd"></path>
                     </svg>
@@ -52,20 +80,21 @@
             </div>
         </header>
         
-        
-
         <!-- Add Movie Button -->
         <a href="/add" class="mb-4 inline-block px-8 py-2 bg-green-500 text-white rounded-lg">Add Movie</a>
         
         <!-- Movie Cards Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <% data.map((el)=>{ %>
-            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white">
-                <!-- Movie Poster -->
-                <img class="w-full h-64 object-cover" src="<%= el.poster %>" alt="Movie Poster">
+            <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white movie-card">
+                <!-- Movie Poster and Hover Video -->
+                <img src="<%= el.poster %>" alt="Movie Poster">
+                <video loop autoplay muted>
+                    <source src="<%= el.video %>">
+                </video>
                 
-                <div class="px-4 py-2">
-                    <!-- Movie Title -->
+                <!-- Movie Details Section -->
+                <div class="movie-details">
                     <div class="font-bold text-xl mb-1"><%= el.title %></div>
                     
                     <!-- Movie Category and Rating -->
@@ -78,15 +107,12 @@
                     
                     <!-- Edit and Delete Buttons -->
                     <div class="flex justify-between mt-4">
-                        
-                            <button class="bg-blue-500 text-white text-sm py-1 px-3 rounded hover:bg-blue-600">
-                                <a href="/edit/<%= el._id %>">Edit</a>
-                            </button>
-                        
+                        <button class="bg-blue-500 text-white text-sm py-1 px-3 rounded hover:bg-blue-600">
+                            <a href="/edit/<%= el._id %>">Edit</a>
+                        </button>
                         <button class="bg-red-500 text-white text-sm py-1 px-3 rounded hover:bg-red-600">
                             <a href="/delete/<%= el._id %>">Delete</a>
                         </button>
-                        
                     </div>
                 </div>
             </div>
