@@ -65,22 +65,27 @@ export const getedit = async(req,res)=>{
 
 export const postedit=async(req,res)=>{
     try{
-
-        
-    const poster = req.files['poster'] ? req.files['poster'][0].path : null;
-    const video = req.files['video'] ? req.files['video'][0].path : null;
-
+  
         const editdata = await movie.findById(req.params.id)
+
+        const poster = req.files['poster'] ? req.files['poster'][0].path : editdata.poster;
+        const video = req.files['video'] ? req.files['video'][0].path : editdata.video;
+
         const imgpath = path.join(__dirname,'..',editdata.poster)
         const videopath = path.join(__dirname,"..",editdata.video)
-        if(req.file){
-            fs.unlinkSync(imgpath)
-            fs.unlinkSync(videopath)
+
+        if(req.files['poster']){
             req.body.poster = poster
-            req.body.video = video
+            fs.unlinkSync(imgpath)
         }else{
-            req.body.poster = editdata.poster
-            req.body.video = editdata.video
+            req.body.poster = poster
+        }
+
+        if(req.files['video']){
+            req.body.video = video
+            fs.unlinkSync(videopath)
+        }else{
+            req.body.video = video
         }
         
         await movie.findByIdAndUpdate(req.params.id,req.body)
