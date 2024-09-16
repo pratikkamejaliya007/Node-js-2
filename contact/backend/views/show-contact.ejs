@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6 min-h-screen">
+
+  <!-- Add Contact Link -->
+  <div class="mb-4 flex justify-between items-center">
+    <a href="/contact/add" class="text-indigo-600 hover:underline text-lg font-semibold">Add Contact</a>
+    <a href="/logout" class="text-red-600 hover:underline text-lg font-semibold">Logout</a>
+  </div>
+
+  <!-- Table Container -->
+  <div class="overflow-x-auto shadow-lg rounded-lg">
+    <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+      <thead class="bg-indigo-600 text-white">
+        <tr>
+          <th class="py-3 px-4 text-left font-medium">Profile</th>
+          <th class="py-3 px-4 text-left font-medium">Name</th>
+          <th class="py-3 px-4 text-left font-medium">Number</th>
+          <th class="py-3 px-4 text-left font-medium">Mail</th>
+          <th class="py-3 px-4 text-left font-medium">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% userdata.map((el) => { %>
+          <tr class="hover:bg-gray-100 transition ease-in-out">
+            <td class="py-4 px-4">
+              <img src="<%= el.profile %>" alt="Profile Picture" class="w-12 h-12 object-cover rounded-full border border-gray-300">
+            </td>
+            <td class="py-4 px-4 text-gray-800"><%= el.name %></td>
+            <td class="py-4 px-4 text-gray-800"><%= el.phone %></td>
+            <td class="py-4 px-4 text-gray-800"><%= el.email %></td>
+            <td class="py-4 px-4 flex space-x-4">
+              <a href="/contact/edit/<%= el._id %>" class="text-green-600 hover:text-green-800 font-semibold">Edit</a>
+              <a href="/contact/delete/<%= el._id %>" class="text-red-600 hover:text-red-800 font-semibold">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
