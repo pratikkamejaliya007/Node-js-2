@@ -9,8 +9,8 @@ contactrouter.get("/",auth,contact)
 contactrouter.get("/add",auth,getcontact)
 contactrouter.post("/add",auth,upload,addcontact)
 
-contactrouter.get("/delete/:id",deletedata)
-contactrouter.get("/edit/:id",getedit)
-contactrouter.post("/edit/:id",upload,postedit);
+contactrouter.delete("/delete/:id",auth,deletedata)
+contactrouter.get("/edit/:id",auth,getedit)
+contactrouter.put("/edit/:id",auth,upload,postedit);
 
 export default contactrouter

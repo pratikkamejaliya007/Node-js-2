@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -6,6 +8,7 @@ function Register() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate=useNavigate()
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,22 +24,19 @@ function Register() {
 
     try {
       // Replace with your actual API endpoint
-      const response = await fetch('https://your-api-url.com/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, email, password }),
-      });
+      const response = await axios.post('http://localhost:8080/register', {
+        username,
+        email,
+        password,
+      }, { withCredentials: true });
 
-      const data = await response.json();
-
-      if (response.ok) {
+      if (response.status === 201) {
         // Handle successful registration (e.g., redirect or show success message)
-        console.log('Registration successful!', data);
+        console.log('Registration successful!', response.data);
+        navigate('/')
       } else {
         // Handle error from API
-        setError(data.message || 'Registration failed. Please try again.');
+        setError(response.data.message || 'Registration failed. Please try again.');
       }
     } catch (err) {
       // Handle network or other errors

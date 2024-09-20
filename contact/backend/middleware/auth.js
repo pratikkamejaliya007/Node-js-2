@@ -7,7 +7,7 @@ export const auth = (req, res, next) => {
     
     // If no token is found, redirect to login
     if (!token) {
-      return res.redirect('/login');
+      return res.status(501).json({message:'Unauthorized User'})
     }
 
     // Verify the token and decode it
