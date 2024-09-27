@@ -1,7 +1,7 @@
 import express from 'express'
 import { dashboard,from_basic, from_wizerd ,adddata, user, login , postlogin , deleteAdmin , edit,postedit} from '../controller/dashboardcontroller.js'
 
-import { register , addregister , logout } from '../controller/User.controller.js'
+import { register , addregister , logout , Sendotp ,resetpassword } from '../controller/User.controller.js'
 
 import { auth , check } from '../middleware/auth.js'
 import uploads from '../middleware/multer.js'
@@ -23,5 +23,8 @@ router.get("/delete/:id",deleteAdmin)
 router.get("/from_basic",auth,from_basic)
 router.get("/from_wizerd",auth,from_wizerd)
 router.post("/add",auth,uploads,adddata)
+
+router.post("/sendotp",Sendotp)
+router.post("/reset-password",resetpassword)
 
 export default router

@@ -99,3 +99,34 @@ export const editdata = async(req,res)=>{
         res.status(400).send(err)
     }
 }
+
+export const change=async(req,res)=>{
+    try{
+        let data= await User.findById(req.user._id)
+        res.render("change",{data})
+    }catch(err){
+        res.status(400).send(err)
+    }
+}
+
+export const changepassword=async(req,res)=>{
+    const {email,password,Conform}=req.body
+    try{
+        let update=await User.findOne({email})
+        const ismatch= await bcrypt.compare(password,update.hashpassword)
+        if(!ismatch){
+            if(password == Conform){
+                let hashpassword = await bcrypt.hash(password,10)
+                let newpass = await User.findByIdAndUpdate(update._id,{hashpassword})
+                newpass ? res.status(200).redirect("/") : res.status(400).redirect("/changepassword")
+            }else{
+                res.status(400).redirect("/changepassword")
+            }
+        }else{
+            res.status(400).redirect("/changepassword")
+        }
+
+    }catch(err){
+        res.status(400).send(err)
+    }
+}

@@ -140,7 +140,7 @@
             </div>
             <div class="row mt-3">
               <!-- Form -->
-              <form class="col-12" action="index.html">
+              <form class="col-12" action="/sendotp" method="post">
                 <!-- email -->
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
@@ -154,8 +154,7 @@
                     type="text"
                     class="form-control form-control-lg"
                     placeholder="Email Address"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
+                    name="email"
                   />
                 </div>
                 <!-- pwd -->
@@ -164,14 +163,12 @@
                     <a
                       class="btn btn-success text-white"
                       href="#"
-                      id="to-login"
-                      name="action"
+                      id="to-login"                    
                       >Back To Login</a
                     >
                     <button
                       class="btn btn-info float-end"
-                      type="button"
-                      name="action"
+                      type="submit"                    
                     >
                       Recover
                     </button>

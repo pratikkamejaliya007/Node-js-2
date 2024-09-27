@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { Adduser , login, register , index , checklogin , logout ,forms , add , del, edit, editdata} from '../controller/user.controller.js'
+import { Adduser , login, register , index , checklogin , logout ,forms , add , del, edit, editdata , change , changepassword} from '../controller/user.controller.js'
 import passport from '../passport.js'
 
 const userrouter=Router()
@@ -19,5 +19,8 @@ userrouter.post("/add",passport.checkAuth,add)
 userrouter.get("/delete/:id",passport.checkAuth,del)
 userrouter.get("/edit/:id",passport.checkAuth,edit)
 userrouter.post("/edit/:id",passport.checkAuth,editdata)
+
+userrouter.get("/changepassword",passport.checkAuth,change)
+userrouter.post("/changepassword",passport.checkAuth,changepassword)
 
 export default userrouter
