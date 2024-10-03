@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Edit Category Page" />
+    <title>Edit Category</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <style>
+      body {
+        background-color: #f8f9fa;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-title {
+        font-size: 24px;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+      }
+
+      .custom-file-input:focus + .custom-file-label {
+        border-color: #80bdff;
+        box-shadow: none;
+      }
+
+      .custom-file-label {
+        font-size: 14px;
+      }
+
+      .btn {
+        border-radius: 5px;
+      }
+
+      .container {
+        margin-top: 40px;
+      }
+
+      .category-img-preview {
+        display: block;
+        margin-bottom: 15px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title text-center">Edit Category</h4>
+              <form class="form-horizontal" action="/subcategory/edit/<%= editsub._id %>" method="post">
+                
+                <!-- Category Name -->
+                <div class="form-group mb-3">
+                  <label for="category" class="form-label">Category</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="category"
+                    name="subcategory"
+                    value="<%= editsub.subcategory %>"
+                    placeholder="Enter Category Name"
+                  />
+                </div>
+
+                <!-- Current Category Image -->                
+                <div class="form-group mb-3">
+                    <label for="CategoryId" class="form-label">Select Category</label>
+                    <select class="form-select" name="CategoryId" id="CategoryId">
+                      <% category.map((el, i) => { %>
+                        <option value="<%= el.id %>"><%= el.category %></option>
+                      <% }) %>
+                    </select>
+                  </div>       
+                                    
+                <!-- Submit Button -->
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary btn-lg">
+                    Update Category
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -4,7 +4,8 @@ import { dashboard,from_basic, from_wizerd ,adddata, user, login , postlogin , d
 import { register , addregister , logout , Sendotp ,resetpassword } from '../controller/User.controller.js'
 
 import { auth , check } from '../middleware/auth.js'
-import uploads from '../middleware/multer.js'
+
+import { uploadProfile } from '../middleware/multer.js'
 
 const router=express.Router()
 
@@ -17,12 +18,12 @@ router.get("/",auth,dashboard)
 
 router.get("/users",auth,user)
 router.get("/edit/:id",edit)
-router.post("/edit/:id",auth,uploads,postedit)
+router.post("/edit/:id",auth,uploadProfile,postedit)
 router.get("/delete/:id",deleteAdmin)
 
 router.get("/from_basic",auth,from_basic)
 router.get("/from_wizerd",auth,from_wizerd)
-router.post("/add",auth,uploads,adddata)
+router.post("/add",auth,uploadProfile,adddata)
 
 router.post("/sendotp",Sendotp)
 router.post("/reset-password",resetpassword)

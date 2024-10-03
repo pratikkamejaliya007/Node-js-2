@@ -1,6 +1,8 @@
 import { Router } from 'express'
 import { Adduser , login, register , index , checklogin , logout ,forms , add , del, edit, editdata , change , changepassword} from '../controller/user.controller.js'
 import passport from '../passport.js'
+import uploadpic from '../middleware/upload.js'
+import { add_category , adddata } from '../controller/category.controller.js'
 
 const userrouter=Router()
 
@@ -22,5 +24,8 @@ userrouter.post("/edit/:id",passport.checkAuth,editdata)
 
 userrouter.get("/changepassword",passport.checkAuth,change)
 userrouter.post("/changepassword",passport.checkAuth,changepassword)
+
+userrouter.get("/add_category",passport.checkAuth,add_category)
+userrouter.post("/adddata",passport.checkAuth,uploadpic,adddata);
 
 export default userrouter

@@ -67,7 +67,7 @@ export const deleteAdmin = async (req, res) => {
       const adminData = await Admin.findById(req.params.id);
       
 
-      if (adminData.profile && adminData.profile !== 'uploads/default.png') {
+      if (adminData.profile && adminData.profile !== 'uploads/profile/default.png') {
   
         const oldImagePath = path.join(__dirname, '../', adminData.profile);
   
@@ -102,7 +102,7 @@ export const postedit = async (req, res) => {
       const adminData = await Admin.findById(req.params.id);
         
       if (req.file) {
-        if (adminData.profile && adminData.profile !== 'uploads/default.png') {
+        if (adminData.profile && adminData.profile !== 'uploads/profile/default.png') {
           const oldImagePath = path.join(__dirname, '../', adminData.profile); 
 
           if (fs.existsSync(oldImagePath)) {

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/seodashlogo.png" />
+  <link rel="stylesheet" href="../../node_modules/simplebar/dist/simplebar.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.min.css" />
+</head>
+
+<body>
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed">
+    <!-- Sidebar Start -->
+    <%- include('aside') %>
+    <!--  Sidebar End -->
+    <!--  Main wrapper -->
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <%- include('Header') %>
+      <!--  Header End -->
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold mb-4">Forms</h5>
+            <div class="card">
+              <div class="card-body">
+                <form action="/adddata" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Category</label>
+                        <input type="text" class="form-control" name="category" id="name" aria-describedby="nameHelp">            
+                    </div>
+                                
+                
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Upload File</label>
+                        <input type="file" class="form-control" name="img" >            
+                    </div>        
+                
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                
+              </div>
+            </div>
+
+            <div class="container mt-4">
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+      
+                      <%= catagory.map((el,i)=>{ %>
+                        <div class="card shadow-sm h-100">
+                          <img src=<%= el.img %> class="card-img-top" alt="Category Image">
+                          <div class="card-body">
+                              <h5 class="card-title">Category Title</h5>
+                              <p class="card-text"><%= el.category %></p>
+                              <div class="d-flex justify-content-between">
+                                  <!-- Edit Button -->
+                                  <a href="#" class="btn btn-warning">
+                                      <i class="bi bi-pencil"></i> Edit
+                                  </a>
+                                  <!-- Delete Button -->
+                                  <a href="#" class="btn btn-danger">
+                                      <i class="bi bi-trash"></i> Delete
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                       <% }) %>
+                        
+                    </div>
+                    <!-- Repeat cards as needed -->
+                </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="py-6 px-6 text-center">
+          <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
+              class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a href="https://themewagon.com/" target="_blank"
+              class="pe-1 text-primary text-decoration-underline">ThemeWagon</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+  <script src="../assets/js/sidebarmenu.js"></script>
+  <script src="../assets/js/app.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+</body>
+
+</html>
