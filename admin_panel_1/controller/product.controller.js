@@ -15,11 +15,10 @@ export const View_product = async(req,res)=>{
         .populate({
             path: 'SubcategoryID',
             populate: {
-              path: 'CategoryId',  // Populate the publisher field inside each book
+              path: 'CategoryId',
               model: 'category'
             }
-          })
-          console.log(JSON.stringify(product, null, 2))
+          })        
         res.render("view-product",{product}) 
     }catch(err){
         res.status(400).send(err)
