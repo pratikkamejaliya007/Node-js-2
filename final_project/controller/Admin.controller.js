@@ -17,26 +17,32 @@ export const Add_admin = async(req,res)=>{
     res.status(201).json({msg : "Admin Added"})
 }
 
-export const login = async(req,res)=>{
+export const login = async(req,res)=>{        
+    console.log(req.body)
     try{
-
-        let user = await Admin.findOne({email:req.body.email})
+        let user = await Admin.findOne({email:req.body.email})        
         if(!user){
-            res.status(404).json({mes:"Admin Not Found"})
+            return res.status(404).json({mes:"Admin Not Found"})
         }        
-
-        let ismatch =await bcrypt.compare(req.body.password,user.password)
+        console.log(user)
+        let ismatch = await bcrypt.compare(req.body.password,user.password)
 
         if(!ismatch){
-            res.status(200).json({mes:"Incorrect Password"})
+            return res.status(404).json({mes:"Incorrect Password"})
         }
 
         const token = jwt.sign({ id: user._id, email: user.email }, "pratik", { expiresIn: "1h" });
 
-        res.status(200).json({mes:"Logging Successfully",token})
+        res.cookie("jwt", token, {
+            httpOnly: false,  // Prevent access from JavaScript (mitigates XSS)
+            sameSite: "Strict",
+            secure:false,  // Prevent CSRF attacks by restricting cross-origin requests
+            maxAge: 3600000  // 1 hour in milliseconds (same as the JWT expiration time)
+          });          
 
+       return res.status(200).json({mes:"Logging Successfully"})
     }catch(err){
-        res.status(400).json({mes:"Uothorizred User"})
+        return res.status(400).json({mes:"Uothorizred User"})
     }
 }
 
