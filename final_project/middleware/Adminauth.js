@@ -10,7 +10,9 @@ export const AdminAuth = async(req,res,next) =>{
         return res.status(401).json({ mes: "Access Denied: No Token Provided" });
     }      
 
-    const token = authHeader.split(' ')[1]; 
+    // const token = authHeader.split(' ')[1]; 
+
+    const token = req.cookies.jwt
 
     try {        
         const decoded = jwt.verify(token, 'pratik'); 

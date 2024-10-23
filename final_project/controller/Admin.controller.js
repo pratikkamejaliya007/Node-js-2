@@ -18,13 +18,11 @@ export const Add_admin = async(req,res)=>{
 }
 
 export const login = async(req,res)=>{        
-    console.log(req.body)
     try{
         let user = await Admin.findOne({email:req.body.email})        
         if(!user){
             return res.status(404).json({mes:"Admin Not Found"})
         }        
-        console.log(user)
         let ismatch = await bcrypt.compare(req.body.password,user.password)
 
         if(!ismatch){
@@ -56,7 +54,7 @@ export const Change = async(req,res)=>{
 
         if(req.body.password == req.body.confrompassword){
             const password = await bcrypt.hash(req.body.password,10)
-            await Admin.findByIdAndUpdate(data.id,{password})
+            await Admin.findByIdAndUpdate(data._id,{password})
             res.status(201).json({msg:"Password Changed"}) 
         }
 

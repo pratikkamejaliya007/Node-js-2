@@ -1,5 +1,5 @@
 import express from 'express'
-import { register , addregister ,login,addlogin,logout } from "../controller/user.contoller.js";
+import { register , addregister ,login,addlogin,logout , Change } from "../controller/user.contoller.js";
 
 const userrouter=express.Router()
 
@@ -8,6 +8,7 @@ const userrouter=express.Router()
 
     userrouter.get("/login",login)
     userrouter.post("/login",addlogin)
+    userrouter.post("/password_change",Change)
 
     userrouter.get("/logout",logout)
 

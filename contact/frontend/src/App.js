@@ -6,6 +6,7 @@ import ContactPage from './pages/Contact';
 import Add_contact from './pages/Add_contact';
 import Edit from './pages/Edit';
 import PrivateRoute from './pages/PrivateRoute';
+import ChangePasswordForm from './pages/Change';
 import Cookies from 'js-cookie';
 
 const token = Cookies.get('jwt'); // Get the JWT from the cookie
@@ -20,7 +21,7 @@ function App() {
           {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+          <Route path='/change' element={<ChangePasswordForm/>} />
           {/* Protected Routes */}
           <Route
             path="/"
